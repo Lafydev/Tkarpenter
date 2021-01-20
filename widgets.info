@@ -1,0 +1,65 @@
+[Frame]
+   relief=
+   height=20m
+   width=20m
+   borderwidth=3
+[LabelFrame]
+   text="Frame"
+   relief=
+   height=10m
+   width=100m
+   borderwidth=3
+[PanedWindow]
+   orient=
+[Button]
+   text="OK"
+   state=
+   underline=0
+[Menubutton]
+   text="Open"
+   underline=0
+[Scale]
+   orient=
+   length=200
+   showvalue=0
+[Label]
+   text="label"
+   relief=flat
+   borderwidth=3
+[Listbox]
+   relief=
+   justify=
+   selectmode=
+   width=10
+   borderwidth=3
+   height="5"
+[Message]
+   text="Message"
+   relief=
+   justify=
+   width="8c"
+   borderwidth="3"
+   bd=2
+[Spinbox]
+   from_=10
+   to_=20
+[Text]
+   height="10"
+[Entry]
+   width=20
+   state=
+   relief=
+   borderwidth=3
+   bd=2
+[Treeview]
+[Combobox]
+[Progressbar]
+[Notebook]
+   height=50
+[Canvas]
+   background="#cccccc"
+   height="240"
+   width="300"
+   relief=
+   borderwidth=3
+[end]
