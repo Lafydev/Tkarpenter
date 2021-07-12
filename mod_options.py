@@ -129,7 +129,7 @@ class Proprietes:
             self.args=newlisteoptions
             self.top1.destroy ()
                     
-        btncancel=Button(self.top1,text="Annuler",underline=0,command=cancel_callback)
+        btncancel=Button(self.top1,text="Cancel",underline=0,command=cancel_callback)
         btncancel.pack(side="right",padx=5,pady=5)
 
         #Bouton OK valide les options
@@ -145,11 +145,11 @@ if __name__=='__main__':
     #tests
     cancel = StringVar()
     def lancer():
-        opt=Proprietes(root,"Label",{'text="test des proprietes"', 'background="#cccccc"', 'pack="left"'},cancel=cancel)
+        opt=Proprietes(root,"Label",{'text="test properties"', 'background="#cccccc"', 'pack="left"'},cancel=cancel)
         print ("cancel:"+str(cancel.get()))
         
         
-    btn=Button(root,text="Lancer Options",command=lancer)
+    btn=Button(root,text="Run Options",command=lancer)
     btn.pack(padx=5,pady=5)
     root.mainloop()
     

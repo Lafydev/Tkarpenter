@@ -15,7 +15,7 @@ Create your widgets in 3 steps :
 
 - you can modify your options or wait and adjust them after exporting the generated python file.
   
-  ![screenshot](screenshot.png)
+  ![screenshot](tkarpenter.jpeg)
 
 <h1>Install</h1>
 

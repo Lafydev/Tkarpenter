@@ -62,7 +62,7 @@ class Treeview():
       #detecte le parent suivant focus 
        select=ltree.focus()
        #print(select)
-       if select!="" and 'Conteneur' in str(ltree.item(select)['text']):
+       if select!="" and 'Container' in str(ltree.item(select)['text']):
            #si un containeur est selectionné devient parent du nouveau widget
            ret=ltree.insert(select,'end',id,text=""+nomwidget+"",values=(id,optpack))
            parent=select
@@ -70,7 +70,7 @@ class Treeview():
        else:
            ret=ltree.insert('top', 'end',id,text=""+nomwidget+"",values=(id,optpack))
            #si conteneur ouvrir
-           if 'Conteneur' in nomwidget :
+           if 'Container' in nomwidget :
                ltree.item(ret, open=TRUE)
            parent='top'
        return(parent)
@@ -149,8 +149,8 @@ class Widget():
          dicpack['side']="left"
          dicpack['padx']="2m"
          dicpack['pady']="2m"
-         parent=Treeview.inserertreeview("Conteneur "+widg,ind,dicpack)
-         #inserertreeview("Conteneur Frame ",ind,dicpack)
+         parent=Treeview.inserertreeview("Container "+widg,ind,dicpack)
+         #inserertreeview("Container Frame ",ind,dicpack)
          CodePython.ecritdata(ind,Frame,parent,dicopt)
          CodePython.ecritpack(ind,dicpack)
 
@@ -168,7 +168,7 @@ class Widget():
       if (cancel != "True"):
          ind=indexunique("fr")
          dicopt=formedicopt(opt) 
-         parent= Treeview.inserertreeview("Conteneur "+widg,ind)
+         parent= Treeview.inserertreeview("Container "+widg,ind)
          CodePython.ecritdata(ind,LabelFrame,parent,dicopt)
          dicpack={}
          dicpack['padx']="2m"
@@ -190,13 +190,13 @@ class Widget():
          ind=indexunique("pw")
          dicopt=formedicopt(opt) 
             
-         parent=Treeview.inserertreeview("Conteneur "+widg,ind)
+         parent=Treeview.inserertreeview("Container "+widg,ind)
          CodePython.ecritdata(ind,PanedWindow,parent,dicopt)
          pw=creewidget(PanedWindow,dictwidg[parent],ind,dicopt)
          
          ltree.focus(ind)
          indlf1=indexunique("lf")
-         Treeview.inserertreeview("Conteneur Labelframe 1",indlf1)
+         Treeview.inserertreeview("Container Labelframe 1",indlf1)
          fich.insert(END,"\t\t"+str(indlf1)+"= ttk.Labelframe("+str(ind)+", text='Pane1', width=100, height=100)\n")
          fich.insert(END,"\t\t"+str(ind)+'.add('+str(indlf1)+')\n')
          lf1 = LabelFrame(pw, text='Pane1', width=100, height=100)
@@ -204,7 +204,7 @@ class Widget():
          dictwidg[indlf1]=lf1
 
          indlf2=indexunique("lf")
-         Treeview.inserertreeview("Conteneur Labelframe 2", indlf2 )
+         Treeview.inserertreeview("Container Labelframe 2", indlf2 )
          #2eme plus petit si horiz => en largeur 
          if dicopt['orient'] == "horizontal" : 
                fich.insert(END,"\t\t"+str(indlf2)+" = ttk.Labelframe("+str(ind)+", text='Pane2', width=80, height=100)\n")
@@ -232,7 +232,7 @@ class Widget():
       if (cancel != "True"):
          dicopt=formedicopt(opt)
          ind=indexunique("nb")
-         parent=Treeview.inserertreeview("Conteneur ttk Notebook",ind )
+         parent=Treeview.inserertreeview("Container ttk Notebook",ind )
          ltree.focus(ind)
          
          CodePython.ecritdata(ind,ttk.Notebook,parent,dicopt, usettk=True)
@@ -247,7 +247,7 @@ class Widget():
 
          #insere 2 label frame pour matérialiser les 2 pages
          indlf1=indexunique("lf")
-         Treeview.inserertreeview("Conteneur LabelFrame 1",indlf1)
+         Treeview.inserertreeview("Container LabelFrame 1",indlf1)
       
          fich.insert(END,"\t\t"+str(indlf1)+' = Frame('+ind+')\n')
          fich.insert(END,"\t\t"+str(indlf1)+'.pack()\n')
@@ -258,7 +258,7 @@ class Widget():
          dictwidg[indlf1]=f1
 
          indlf2=indexunique("lf")
-         Treeview.inserertreeview("Conteneur LabelFrame 2",indlf2 )
+         Treeview.inserertreeview("Container LabelFrame 2",indlf2 )
          fich.insert(END,"\t\t"+str(indlf2)+' = Frame('+ind+')\n')
          fich.insert(END,"\t\t"+str(indlf2)+'.pack()\n')
          fich.insert(END,"\t\t"+str(ind)+'.add('+str(indlf2)+', text="Page2")\n')
@@ -643,7 +643,7 @@ class CodePython():
       ajd=time.localtime()
       # jj/mm/aa
       fich.insert(END,'%d/%d/%d """\n' %(ajd[2],ajd[1],ajd[0]))
-      fich.insert(END,"#Fenetre principale\n")
+      fich.insert(END,"#Main window\n")
       fich.insert(END,"from tkinter import *\n")
       fich.insert(END,"from tkinter import ttk\n")
       fich.insert(END,"root=Tk()\n\n")
@@ -695,11 +695,11 @@ class CodePython():
       enregistrer=True
       #si fichier existe avertir
       if os.path.exists(nomfich):
-         if (messagebox.askquestion('Attention','ce fichier existe déjà, écraser ?')=='no'):
+         if (messagebox.askquestion('Warning','this file exists, rewrite ?')=='no'):
             enregistrer=False
        
       if (enregistrer):
-         fichier=open('fenetredemo.py','w')
+         fichier=open('samplewindow.py','w')
          #reprend le code affiché
          fichier.write(fich.get("1.0",END))
          #compléter la fin du fichier
@@ -712,7 +712,7 @@ class CodePython():
          fichier.write("\tapp.run()\n")   
 
          fichier.close
-         print ('fenetredemo a été généré dans le répertoire courant')
+         print ('samplewindow saved in your main directory')
 
    
 def CentrerFenetre(fenetre, width, height):
@@ -728,8 +728,8 @@ def Suppr():
    select=ltree.focus()
    #ne pas supprimer top
    if select=='top':
-      messagebox.showinfo('Refusé','Suppression refusée')
-   elif messagebox.askokcancel('Supprimer','Confirmer la suppression ?'):
+      messagebox.showinfo('No','Not deleted')
+   elif messagebox.askokcancel('Delete','Are you sure ?'):
       #message différent s'il a des enfants ?
          
       #supprimer les widgets réels
@@ -796,7 +796,7 @@ def Modif():
 #---------Fenêtre principale
 root=Tk()
 
-root.title('Générateur de fenêtre Tkinter')
+root.title('Tkinter window generator')
 CentrerFenetre(root,LARGEUR,HAUTEUR)
 
 #Frame contenants tous les widgets
@@ -804,7 +804,7 @@ frmOutils=Frame(root,bg="#d0d0d0",relief=GROOVE)
 frmOutils.pack(side="left",anchor="n")
 
 # Barre d'outils1: conteneurs
-tool_cont=LabelFrame(frmOutils,bg="#d0d0d0",text="conteneurs",relief=GROOVE)   
+tool_cont=LabelFrame(frmOutils,bg="#d0d0d0",text="Containers",relief=GROOVE)   
 tool_cont.pack(side="top",anchor="w")
      
 class BtnOutil(Button):
@@ -889,23 +889,23 @@ ltree.bind("<Button-1>",Treeview.clicktree)
 
 # fleches de changement de position
 pw=PanedWindow(frtree,orient=VERTICAL)
-btnSuppr=Button(pw,text="Suppr",command=Suppr)
+btnSuppr=Button(pw,text="Delete",command=Suppr)
 btnSuppr.pack(side=TOP,fill=X)
-btnModif=Button(pw,text="Modif",command=Modif)
+btnModif=Button(pw,text="Change",command=Modif)
 btnModif.pack(side=TOP,fill=X)
 
-btnH=Button(pw,text="Haut",command=Treeview.haut)
+btnH=Button(pw,text="Top",command=Treeview.haut)
 ##btnB=Button(pw,text="Bas", command=Treeview.bas)
 btnH.pack(side=TOP,fill=X)
 ##btnB.pack(side=TOP,fill=X)
 pw.pack(side=LEFT)
 
 # frame contenant le code python et le bouton enregistrer le code
-frBottom=LabelFrame(root,bg="#d0d0d0",text="Code python",relief=GROOVE)
+frBottom=LabelFrame(root,bg="#d0d0d0",text="Python code",relief=GROOVE)
 frBottom.pack(side=TOP, anchor="s",fill=NONE)
 
 # Bouton pour générer le code
-btn=Button(frBottom,text="Copier le code python dans un fichier",underline=0,command=CodePython.enregistrecode)
+btn=Button(frBottom,text="Save python code",underline=0,command=CodePython.enregistrecode)
 btn.pack(side=BOTTOM, anchor="s")
 
 
@@ -920,7 +920,7 @@ sc1.pack(side="left")
 
 CodePython.initcode()
 
-ltree.insert('', 0,'top',text="Fenetre principale",value="top")
+ltree.insert('', 0,'top',text="Main window",value="top")
 ltree.item('top', open=TRUE) #noeud déployé
 
 #rendre optionnel : fenetre unique ou top ?
